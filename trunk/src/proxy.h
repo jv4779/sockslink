@@ -168,7 +168,8 @@ extern int stricmp( const char *string1, const char *string2 );
 
 typedef enum {
 	CLIENT,
-	SERVER
+	SERVER,
+	CONTROL
 } DIRECTION;
 
 typedef enum {
@@ -496,6 +497,7 @@ int scanaddr(const unsigned char *s, unsigned long * ip, unsigned long * mask);
 int myinet_ntoa(struct in_addr in, char * buf);
 extern unsigned long nservers[MAXNSERVERS];
 unsigned long getip(unsigned char *name);
+void getIpPort(unsigned char *name, unsigned long* ip, int* port);
 unsigned long myresolver(unsigned char *);
 unsigned long fakeresolver (unsigned char *name);
 int inithashtable(unsigned nhashsize);
