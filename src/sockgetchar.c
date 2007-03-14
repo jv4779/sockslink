@@ -8,6 +8,10 @@
 #include "proxy.h"
 #define BUFSIZE ((param->service == S_UDPPM)?UDPBUFSIZE:TCPBUFSIZE)
 
+int link_socksend(struct clientparam * param, unsigned char * buf, int bufsize, int to){
+	// TODO
+	return bufsize;
+}
 
 int socksend(SOCKET sock, unsigned char * buf, int bufsize, int to){
  int sent = 0;

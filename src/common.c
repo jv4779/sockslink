@@ -469,7 +469,7 @@ void logsyslog(struct clientparam * param, const unsigned char *s) {
 int doconnect(struct clientparam * param){
  SASIZETYPE size = sizeof(param->sins);
  struct sockaddr_in bindsa;
- if (param->remsock == INVALID_SOCKET && param->operation != DNSRESOLVE && param->operation !=ADMIN) {
+ if (param->remsock == INVALID_SOCKET) {
 	struct linger lg;
 	int opt = 1;
 
@@ -605,4 +605,25 @@ unsigned long getip(unsigned char *name){
 	pthread_mutex_unlock(&gethostbyname_mutex);
 #endif
 	return retval;
+}
+
+void getIpPort(unsigned char *name, unsigned long* ip, int* port){
+	char* sp;
+	char* hostname;
+
+	*ip = 0;
+	*port = 0;
+
+	if(!name || !*name) return;
+
+	hostname = (unsigned char *)mystrdup(name);
+
+	if ( (sp = strchr(hostname, ':')) ) *sp = 0;
+
+	if(sp){
+		*port = atoi(sp+1);
+	}
+	*ip = getip(hostname);
+
+	myfree(hostname);
 }
